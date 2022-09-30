@@ -12,6 +12,8 @@ It is open to everyone in the community and anyone whether you're a seasoned con
 
 ## **About this repository**
 
+It is a repositry consisting of java tutorials,projects, Data Structures and Algorithm, Roadmap Questions and Problems with Solution . Building a FREE Resources for java learners Anyone is allowed t contribute in this project to buid this free resource s that everyne can earn and grow together
+
 
 ## **Community Classroom <img width="20px" src="https://yt3.ggpht.com/7xZQZivs7_mQA-uvO64u9vxIqyhrfLNDSPjQEuxehnnq98fe76OHkt0ohTnZVdZwZdckZBam=s900-c-k-c0x00ffffff-no-rj"> Guidelines 🥸**
 - No spam.
