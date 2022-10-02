@@ -1,3 +1,5 @@
+// Question: Find the product of two matrices 
+
 package com.company;
 
 import java.util.Scanner;
