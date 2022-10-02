@@ -1,5 +1,6 @@
 # Color Switch
 Hi there, we had created a cool desktop Color Switch app.
+This Application is created using [JavaFx](https://www.java.com/en/javafx/) and [AnimateFx](https://github.com/Typhon0/AnimateFX)
 
 ## Features
 - Different kinds of obstacles, that can only be passed through the same color as the ball
