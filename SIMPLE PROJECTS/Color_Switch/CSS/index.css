@@ -1,0 +1,59 @@
+
+h1 { 
+	margin: 300px auto; 
+	text-align: center; 
+	color: blueviolet; 
+	font-size: 8em; 
+	transition: 0.5s; 
+	font-family: Arial, Helvetica, sans-serif; 
+} 
+
+h1:hover { 
+	text-shadow: 0 1px 0 #ccc, 0 2px 0 #ccc, 
+				 0 3px 0 #ccc, 0 4px 0 #ccc, 
+				 0 5px 0 #ccc, 0 6px 0 #ccc, 
+				 0 7px 0 #ccc, 0 8px 0 #ccc, 
+				 0 9px 0 #ccc, 0 10px 0 #ccc, 
+				 0 11px 0 #ccc, 0 12px 0 #ccc, 
+				 0 20px 30px rgba(0, 0, 0, 0.5); 
+} 
+a { 
+	margin: 300px auto; 
+	text-align: center; 
+	color: grey;
+	scale: 2; 
+	margin-left: 5em;
+	font-size: 4em;
+	transition: 0.5s; 
+	font-family: Arial, Helvetica, sans-serif; 
+} 
+
+a:hover { 
+	text-shadow: 0 1px 0 grey, 0 2px 0 grey, 
+				 0 3px 0 grey, 0 4px 0 grey, 
+				 0 5px 0 grey, 0 6px 0 grey, 
+				 0 7px 0 grey, 0 8px 0 grey, 
+				 0 9px 0 grey, 0 10px 0 grey, 
+				 0 11px 0 grey, 0 12px 0 grey, 
+				 0 20px 30px rgba(0, 0, 0, 0.5); 
+} 
+
+iframe {
+	border-radius: 10%;
+	align-items: center;
+	text-align: center;
+	transition: 0.5s; 
+ }
+
+ iframe:hover{
+	image-resolution: inherit;
+	border-image: round;
+	
+	box-shadow: 0 1px 0 blue, 0 2px 0 blue, 
+	0 3px 0 blue, 0 4px 0 blue, 
+	0 5px 0 blue, 0 6px 0 blue, 
+	0 7px 0 blue, 0 8px 0 blue, 
+	0 9px 0 blue, 0 10px 0 blue, 
+	0 11px 0 blue, 0 12px 0 blue, 
+	0 20px 30px rgba(0, 0, 0, 0.5); ;
+}
