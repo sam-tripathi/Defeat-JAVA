@@ -15,7 +15,7 @@ It is open to everyone in the community and anyone whether you're a seasoned con
 It is a repository consisting of java tutorials,projects, Data Structures and Algorithm, Roadmap Questions and Problems with Solution . Building a FREE Resources for java learners Anyone is allowed to contribute in this project to build this free resource that everyne can earn and grow together.
 
 
-## **Community Classroom <img width="20px" src="https://yt3.ggpht.com/7xZQZivs7_mQA-uvO64u9vxIqyhrfLNDSPjQEuxehnnq98fe76OHkt0ohTnZVdZwZdckZBam=s900-c-k-c0x00ffffff-no-rj"> Guidelines 🥸**
+## **Community Guidelines 🥸**
 - No spam.
 - PRs for Hacktober will only be considered if an issue was raised beforehand.
 - Maintain proper code of conduct.
