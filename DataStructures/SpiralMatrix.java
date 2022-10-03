@@ -6,19 +6,19 @@ public class Main
         int i,k=0,l=0;
         while(k<m && l<n)
         {
-            //the first row
+            // This loop is for moving the first row
             for(i=l;i<n;i++)
             {
                 System.out.print(arr[k][i]+" ");
             }
             k++;
-            //last column
+            //This loop is for moving  last column
              for(i=k;i<n;i++)
             {
                 System.out.print(arr[i][n-1]+" ");
             }
             n--;
-            if(k<m)//This is for the last row
+            if(k<m)//This loop  is for moving to the last row
             {
                  for(i=n-1;i>=l;i--)
             {
@@ -26,7 +26,7 @@ public class Main
             }
             m--; 
             }
-            if(l<n)//This is for the first column
+            if(l<n)//This loop is for moving the first column
             {
                   for(i=m-1;i>=k;i--)
             {
@@ -40,12 +40,13 @@ public class Main
 	public static void main(String[] args) {
 		int R = 4;
 		int C = 4;
+		//example data
 		int a[][] = {{1, 2, 3, 4},
 				{5, 6, 7, 8},
 				{9, 10, 11, 12},
 				{13, 14, 15, 16}};
 
-		
+		//function call
 		spiralPrint(R, C, a);
 	}
 }
