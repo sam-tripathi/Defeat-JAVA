@@ -1,9 +1,11 @@
+// A simple java program to compute the BMI of a user based on his height and weight.
+// Switch case is used to compute the BMI of a user based on the unit system he inputs the data in.
 import java.util.Scanner;
 
-class BMI_Calculator {
+class BMI_Calculator {            // program starts
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        double weight, height = 0.0;
+        Scanner sc = new Scanner(System.in);   // Scanner class to take input from the user
+        double weight, height = 0.0; 
         double bmi = 0.0;
         System.out.println("--------------------------------------------------");
         System.out.println("----------------Body Mass Calculator--------------");
@@ -19,7 +21,7 @@ class BMI_Calculator {
                 weight = sc.nextDouble();
                 System.out.println("Enter your Height in meters (m) : ");
                 height = sc.nextDouble();
-                bmi = (weight / (height * height));
+                bmi = (weight / (height * height));   // formula to calculate BMI  in Kilograms and Meters.
                 break;
 
             case 2:               // case to calculate BMI in Pounds and Inches
@@ -27,7 +29,7 @@ class BMI_Calculator {
                 weight = sc.nextDouble();
                 System.out.println("Enter your Height in inches (in) : ");
                 height = sc.nextDouble();
-                bmi = 703 * (weight / (height * height));
+                bmi = 703 * (weight / (height * height));   // formula to calculate BMI in Pounds and Inches
                 break;
 
             default:
@@ -57,7 +59,7 @@ class BMI_Calculator {
         else{
             System.out.println("You are Morbidly Obese");
         }
-        System.out.println("--------------------------------------------------");
+        System.out.println("--------------------------------------------------");   // program ends
 
     }
 }
