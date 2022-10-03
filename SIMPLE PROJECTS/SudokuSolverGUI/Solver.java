@@ -1,4 +1,4 @@
-public class sudokuSolver{
+public class Solver {
 
     public static boolean checkRow(SudokuClass test, int i, int j){
         for (int col=0; col<9; col++){
@@ -149,8 +149,8 @@ public class sudokuSolver{
         
         return false;
     }
-
-    public static void main(String[] args){
-
+    
+    public static void main(String[] args) {
+        new GUI();
     }
 }

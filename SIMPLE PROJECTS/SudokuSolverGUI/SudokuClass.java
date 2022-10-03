@@ -1,5 +1,5 @@
 import java.util.*;
-public class SudokuClass {
+public class SudokuClass{
     int[][] sudoku = new int[9][9];
     
     Scanner scn = new Scanner(System.in);
