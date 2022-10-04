@@ -1,3 +1,25 @@
+//In this approach, anytime we obtain a result, we'll store it in a matrix for later use rather than exploring every conceivable path. 
+Every time we run into the same subproblem, we just take the value out of the matrix rather than recalculating it. We can prevent recomputation and significantly 
+lower time complexity by using this memorising strategy. The fundamental premise of this dynamic programming approach is this.
+Step 1: Take a dummy matrix A[ ][ ]  of size m X n and fill it with -1. 
+
+Step 2: At first, we are at the (0,0) index let’s assume this state as (i,j).
+From here we can move towards the bottom as well as towards the right and we recursively move until we hit the base case.
+
+Step 3: At any point of time when the recursive call goes out of the boundary (example: let’s assume m = 2, n= 3, and the current position of i and j is (2,0) which is 
+out of matrix boundary), we will return zero because from here there are no possible paths beyond and that is the first base case.
+
+Step 4: Whenever the recursive call reaches the end we’ll return 1 because we have found one possible path to reach the end.
+
+Step 5: The only change in the dynamic programming solution is whenever we are returning answers we store them in the matrix A[i][j] and wherever we are making a 
+recursive call we simply check if that state is already visited or not in other words we’ll check if A[i][j] is -1 or not if it is not -1 that means that there is a
+subproblem which is repeating.Now instead of recomputing the subproblem, we’ll return the value at A[i][j].//
+
+
+
+
+
+
 #include<bits/stdc++.h>
 using namespace std;
 class Solution {
