@@ -1,6 +1,6 @@
 import javax.swing.*;
 
-publicclassGuessingGame {
+public class GuessingGame {
 
 publicstaticvoidmain(String[] args) {
 
