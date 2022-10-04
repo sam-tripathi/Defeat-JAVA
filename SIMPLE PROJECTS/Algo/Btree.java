@@ -23,37 +23,40 @@ public class Btree {
     }
 
     private List<Integer> sortedTreeLevels(Btree node) {
-        if (node == null)
+        if (node == null){
             return List.of();
-        List<Integer> res = new ArrayList<>();
+        }
+        /*
+		*else if node isn't empty, 
+		*we create an ArrayList and an ArayDeque
+		*and store in the latter the data of node
+		*/
+        List<Integer> response = new ArrayList<>();
         Queue<Btree> stack = new ArrayDeque<>();
         stack.add(node);
-
         while (!stack.isEmpty()) {
+        /*
+        *we put the first element of stack in
+        *response
+        */
             Btree state = stack.poll();
-            res.add(state.data);
-
-            if (state.left != null)
+            response.add(state.data);
+         /*
+         *we take the value of state.left and 
+         *state.right and put it in stack if 
+         *they are not null
+         */
+            if (state.left != null){
                 stack.add(state.left);
-            if (state.right != null)
+            }
+            if (state.right != null){
                 stack.add(state.right);
-        }
-
-        return res;
-    }
-
-    private int maxSum(Btree node) {
-        if (node == null) return 0;
-        if (node.left == null && node.right == null) return node.data;
-        return node.data + Math.max(maxSum(node.left), maxSum(node.right));
-    }
-
-    public int maxSum() {
-        return maxSum(this);
+            }
+		}
+        return response;
     }
 
     public List<Integer> sortedTreeLevels() {
         return sortedTreeLevels(this);
     }
 }
-
