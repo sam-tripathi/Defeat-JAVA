@@ -60,7 +60,7 @@ class Child extends Parent {
 class Main{
     public static void main(String[] args) {
         Parent c = new Child();
-        c.show(); 
+        c.show(); //Prints "This is child class"
         /*
          When an object of child class is created, then the method inside the child class is called. 
          This is because The method in the parent class is overridden by the child class. Since The method 
