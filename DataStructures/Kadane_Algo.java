@@ -1,3 +1,20 @@
+// This approach basically checks all possible subarrays, which means if the size of array is n then the time-complexity of this algorithm would be O(n²), thus taking huge time to execute.
+
+// Initialize: local_max = 0 global_max = INT_MIN
+
+// For each element we will follow these steps:
+
+// if (a[i] <= local_max + a[i]) local_max = local_max + a[i]
+// else local_max = a[i]
+// global_max = max(global_max, local_max)
+// global_max is the maximum sum required.
+
+// Analysing the above approach, we can write a recursive formulation for Kadane's algorithm.
+
+// local_max[i] = max( A[ i ], A[ i ] + local_max[ i-1 ] )
+
+// resulting answer will be the maximum of all the values of local_max[i]
+
 import java.util.*;
 public class Kadane_Algo
 {
