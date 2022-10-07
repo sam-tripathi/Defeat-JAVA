@@ -1,0 +1,8 @@
+com\fenixhub\Matrix\IntegerMatrix.class
+com\fenixhub\Matrix\AbstractGenericMatrix.class
+com\fenixhub\App.class
+com\fenixhub\Matrix\GenericMatrixBuilder.class
+com\fenixhub\Matrix\MatrixOperations.class
+com\fenixhub\Matrix\IntegerMatrixBuilder.class
+com\fenixhub\Exceptions\MatrixSizeException.class
+com\fenixhub\Matrix\GenericMatrix.class
