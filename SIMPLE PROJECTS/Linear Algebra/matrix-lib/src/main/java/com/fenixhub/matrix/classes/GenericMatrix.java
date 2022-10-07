@@ -1,23 +1,28 @@
-package com.fenixhub.Matrix;
+package com.fenixhub.matrix.classes;
 
 import java.lang.reflect.Array;
 
-import com.fenixhub.Exceptions.MatrixSizeException;
+import com.fenixhub.exceptions.MatrixSizeException;
 
 @SuppressWarnings("unchecked")
-public class GenericMatrix<T> extends AbstractGenericMatrix<T> {
+public class GenericMatrix<T extends Number> extends AbstractGenericMatrix<T> {
     
     @Override
-    protected Class<T> getClazz() {
-        return (Class<T>) this.matrix.getClass().getComponentType().getComponentType();
+    public Class<T> getClazz() {
+        return (Class<T>) this.array.getClass().getComponentType().getComponentType();
     }
 
-    public GenericMatrix() {
-        super();
+    @Override
+    protected String getFormat() {
+        return "%"+formatPaddings+"s";
     }
 
-    public GenericMatrix(int nRows, int nColumns) {
-        super(nRows, nColumns);
+    public GenericMatrix(Class<T> clazz) {
+        super(clazz);
+    }
+
+    public GenericMatrix(int nRows, int nColumns, Class<T> clazz) {
+        super(nRows, nColumns, clazz);
     }
 
     public GenericMatrix(T[][] array) {
@@ -25,13 +30,13 @@ public class GenericMatrix<T> extends AbstractGenericMatrix<T> {
     }
 
     @Override
-    public void setMatrix(T[][] matrix) {
-        this.matrix = matrix;
+    public void setArray(T[][] array) {
+        this.array = array;
     }
 
     @Override
     public T[][] getArrayCopy() {
-        return matrix.clone();
+        return this.array.clone();
     }
 
     protected T[][] getArrayCopy(int fromRow, int fromColumn, int toRow, int toColumn) {
@@ -48,27 +53,27 @@ public class GenericMatrix<T> extends AbstractGenericMatrix<T> {
             throw new IndexOutOfBoundsException("To column index is out of bound.");
         }
         
-        T[][] tempMatrix = (T[][]) Array.newInstance(getClazz(), toRow - fromRow, toColumn - fromColumn);
+        T[][] tempArray = (T[][]) Array.newInstance(getClazz(), toRow - fromRow, toColumn - fromColumn);
 
-        for (int i = 0; i < tempMatrix.length; i++) {
-            for (int j = 0; j < tempMatrix[i].length; j++) {
-                tempMatrix[i][j] = (T) matrix[fromRow + i][fromColumn + j];
+        for (int i = 0; i < tempArray.length; i++) {
+            for (int j = 0; j < tempArray[i].length; j++) {
+                tempArray[i][j] = (T) this.array[fromRow + i][fromColumn + j];
             }
         }
         
-        return tempMatrix;
+        return tempArray;
     }
 
 
     @Override
     public GenericMatrix<T> setRow(int index, T[] row) {
-        if (index < 0 || index >= matrix.length) {
+        if (index < 0 || index >= this.array.length) {
             throw new IndexOutOfBoundsException("Row index is out of bound.");
         }
-        if (row.length != matrix[index].length) {
+        if (row.length != this.array[index].length) {
             throw new MatrixSizeException("Row size is not valid.");
         }
-        matrix[index] = row;
+        this.array[index] = row;
         return this;
     }
 
@@ -77,22 +82,22 @@ public class GenericMatrix<T> extends AbstractGenericMatrix<T> {
         if (index < 0 || index > getRows()) {
             throw new IndexOutOfBoundsException("Row index is out of bound.");
         }
-        if (row.length != matrix.length) {
+        if (row.length != this.array.length) {
             throw new MatrixSizeException("Row size is not valid.");
         }
 
-        T[][] tempMatrix = (T[][]) Array.newInstance(getClazz(), getRows() + 1, getColumns());
-        for (int i = 0; i < tempMatrix.length; i++) {
+        T[][] tempArray = (T[][]) Array.newInstance(getClazz(), getRows() + 1, getColumns());
+        for (int i = 0; i < tempArray.length; i++) {
             if (i < index) {
-                tempMatrix[i] = matrix[i];
+                tempArray[i] = this.array[i];
             } else if (i == index) {
-                tempMatrix[i] = row;
+                tempArray[i] = row;
             } else {
-                tempMatrix[i] = matrix[i - 1];
+                tempArray[i] = this.array[i - 1];
             }
         }
         
-        setMatrix(tempMatrix);
+        setArray(tempArray);
         return this;
     }
 
@@ -101,11 +106,11 @@ public class GenericMatrix<T> extends AbstractGenericMatrix<T> {
         if (index < 0 || index >= getColumns()) {
             throw new IndexOutOfBoundsException("Column index is out of bound.");
         }
-        if (column.length != matrix[0].length) {
+        if (column.length != this.array[0].length) {
             throw new MatrixSizeException("Column size is not valid.");
         }
         for (int i = 0; i < getRows(); i++) {
-            matrix[i][index] = column[i];
+            this.array[i][index] = column[i];
         }
         return this;
     }
@@ -115,24 +120,24 @@ public class GenericMatrix<T> extends AbstractGenericMatrix<T> {
         if (index < 0 || index > getColumns()) {
             throw new IndexOutOfBoundsException("Column index is out of bound.");
         }
-        if (column.length != matrix.length) {
+        if (column.length != this.array.length) {
             throw new MatrixSizeException("Column size is not valid.");
         }
 
-        T[][] tempMatrix = (T[][]) Array.newInstance(getClazz(), getRows(), getColumns() + 1);
-        for (int i = 0; i < tempMatrix.length; i++) {
-            for (int j = 0; j < tempMatrix[i].length; j++) {
+        T[][] tempArray = (T[][]) Array.newInstance(getClazz(), getRows(), getColumns() + 1);
+        for (int i = 0; i < tempArray.length; i++) {
+            for (int j = 0; j < tempArray[i].length; j++) {
                 if (j < index) {
-                    tempMatrix[i][j] = matrix[i][j];
+                    tempArray[i][j] = this.array[i][j];
                 } else if (j == index) {
-                    tempMatrix[i][j] = column[i];
+                    tempArray[i][j] = column[i];
                 } else {
-                    tempMatrix[i][j] = matrix[i][j - 1];
+                    tempArray[i][j] = this.array[i][j - 1];
                 }
             }
         }
 
-        setMatrix(tempMatrix);
+        setArray(tempArray);
         return this;
     }
 
@@ -144,7 +149,7 @@ public class GenericMatrix<T> extends AbstractGenericMatrix<T> {
         if (column < 0 || column >= getColumns()) {
             throw new IndexOutOfBoundsException("Column index is out of bound.");
         }
-        matrix[row][column] = value;
+        this.array[row][column] = value;
         return this;
     }
 
@@ -153,12 +158,12 @@ public class GenericMatrix<T> extends AbstractGenericMatrix<T> {
         if (index < 0 || index >= getRows()) {
             throw new IndexOutOfBoundsException("Row index is out of bound.");
         }
-        return matrix[index];
+        return this.array[index];
     }
 
     @Override
     public int getRows() {
-        return matrix.length;
+        return this.array.length;
     }
 
     @Override
@@ -166,16 +171,16 @@ public class GenericMatrix<T> extends AbstractGenericMatrix<T> {
         if (index < 0 || index >= getColumns()) {
             throw new IndexOutOfBoundsException("Column index is out of bound.");
         }
-        T[] column = (T[]) new Object[getRows()];
+        T[] column = (T[]) Array.newInstance(getClazz(), getRows());
         for (int i = 0; i < getRows(); i++) {
-            column[i] = matrix[i][index];
+            column[i] = this.array[i][index];
         }
         return column;
     }
 
     @Override
     public int getColumns() {
-        return matrix[0].length;
+        return this.array[0].length;
     }
 
     @Override
@@ -186,7 +191,7 @@ public class GenericMatrix<T> extends AbstractGenericMatrix<T> {
         if (column < 0 || column >= getColumns()) {
             throw new IndexOutOfBoundsException("Column index is out of bound.");
         }
-        return matrix[row][column];
+        return this.array[row][column];
     }
 
     @Override
@@ -206,7 +211,7 @@ public class GenericMatrix<T> extends AbstractGenericMatrix<T> {
 
     @Override
     public GenericMatrix<T> resize(int fromRow, int fromColumn, int toRow, int toColumn) {
-        setMatrix(getArrayCopy(fromRow, fromColumn, toRow, toColumn));
+        setArray(getArrayCopy(fromRow, fromColumn, toRow, toColumn));
         return this;
     }
 
@@ -215,7 +220,7 @@ public class GenericMatrix<T> extends AbstractGenericMatrix<T> {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < getRows(); i++) {
             for (int j = 0; j < getColumns(); j++) {
-                sb.append(matrix[i][j]).append(" ");
+                sb.append(String.format(getFormat(), this.array[i][j])).append(" ");
             }
             sb.append("\r\n");
         }

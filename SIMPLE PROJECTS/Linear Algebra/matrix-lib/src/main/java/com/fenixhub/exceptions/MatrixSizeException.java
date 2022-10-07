@@ -1,4 +1,4 @@
-package com.fenixhub.Exceptions;
+package com.fenixhub.exceptions;
 
 public class MatrixSizeException extends RuntimeException {
 

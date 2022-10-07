@@ -1,27 +1,31 @@
-package com.fenixhub.Matrix;
+package com.fenixhub.matrix.classes;
 
 import java.lang.reflect.Array;
 
 @SuppressWarnings("unchecked")
-abstract class AbstractGenericMatrix<T> {
+abstract class AbstractGenericMatrix<T extends Number> {
     
-    protected T[][] matrix;
+    public int formatPaddings = 4;
+
+    protected T[][] array;
 
     protected abstract Class<? extends T> getClazz();
 
-    protected AbstractGenericMatrix() {
-        this.matrix = (T[][]) Array.newInstance(getClazz(), 0, 0);
+    protected abstract String getFormat();
+
+    protected AbstractGenericMatrix(Class<T> clazz) {
+        this.array = (T[][]) Array.newInstance(clazz, 0, 0);
     }
 
-    protected AbstractGenericMatrix(int nRows, int nColumns) {
-        this.matrix = (T[][]) Array.newInstance(getClazz(), nRows, nColumns);
+    protected AbstractGenericMatrix(int nRows, int nColumns, Class<T> clazz) {
+        this.array = (T[][]) Array.newInstance(clazz, nRows, nColumns);
     }
 
-    public AbstractGenericMatrix(T[][] matrix) {
-        this.matrix = matrix;
+    public AbstractGenericMatrix(T[][] array) {
+        this.array = array;
     }
 
-    protected abstract void setMatrix(T[][] matrix);
+    protected abstract void setArray(T[][] array);
 
     protected abstract T[][] getArrayCopy();
 
