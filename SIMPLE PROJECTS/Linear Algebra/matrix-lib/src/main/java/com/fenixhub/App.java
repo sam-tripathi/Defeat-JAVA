@@ -2,6 +2,7 @@ package com.fenixhub;
 
 import java.util.Arrays;
 
+import com.fenixhub.matrix.builders.GenericMatrixBuilder;
 import com.fenixhub.matrix.classes.GenericMatrix;
 import com.fenixhub.matrix.classes.IntegerMatrix;
 import com.fenixhub.matrix.utilities.MatrixOperations;
@@ -37,12 +38,12 @@ public class App
         System.out.println("Getting subarray 2x2 from index 0, 0");
         System.out.println(matrix.getMatrix(2, 2));
 
-        // System.out.println("Generating a random matrix with a MatrixBuilder");
-        // IntegerMatrix newMatrixFromBuilder = (IntegerMatrix) new GenericMatrixBuilder<Integer>(Integer.class)
-        // .fromRandom(10, 10, -20, 20)
-        // .build();
-// 
-        // System.out.println(newMatrixFromBuilder);
+        System.out.println("Generating a random matrix with a MatrixBuilder");
+        IntegerMatrix newMatrixFromBuilder = new IntegerMatrix(new GenericMatrixBuilder<>(Integer.class)
+        .fromRandom(10, 10, -20, 20)
+        .build()
+        );
+        System.out.println(newMatrixFromBuilder);
 
         GenericMatrix<Integer> doubleMatrix = new GenericMatrix<Integer>(new Integer[][]{
             {1, 2, 3},

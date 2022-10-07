@@ -25,6 +25,10 @@ abstract class AbstractGenericMatrix<T extends Number> {
         this.array = array;
     }
 
+    public AbstractGenericMatrix(AbstractGenericMatrix<T> matrix) {
+        this.array = matrix.getArrayCopy();
+    }
+
     protected abstract void setArray(T[][] array);
 
     protected abstract T[][] getArrayCopy();

@@ -29,6 +29,10 @@ public class GenericMatrix<T extends Number> extends AbstractGenericMatrix<T> {
         super(array);
     }
 
+    public GenericMatrix(AbstractGenericMatrix<T> matrix) {
+        super(matrix);
+    }
+
     @Override
     public void setArray(T[][] array) {
         this.array = array;

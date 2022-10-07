@@ -24,4 +24,8 @@ public class IntegerMatrix extends GenericMatrix<Integer> {
         super(array);
     }
 
+    public IntegerMatrix(GenericMatrix<Integer> matrix) {
+        super(matrix);
+    }
+
 }

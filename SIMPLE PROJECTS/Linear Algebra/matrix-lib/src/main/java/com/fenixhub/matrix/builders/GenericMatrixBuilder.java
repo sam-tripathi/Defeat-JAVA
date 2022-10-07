@@ -3,6 +3,7 @@ package com.fenixhub.matrix.builders;
 import java.util.Random;
 
 import com.fenixhub.matrix.classes.GenericMatrix;
+import com.fenixhub.matrix.utilities.MatrixOperations;
 
 @SuppressWarnings("unchecked")
 public class GenericMatrixBuilder<T extends Number> {
@@ -25,8 +26,7 @@ public class GenericMatrixBuilder<T extends Number> {
         this.matrix = new GenericMatrix<T>(nRows, nColumns, clazz);
         for (int i = 0; i < nRows; i++) {
             for (int j = 0; j < nColumns; j++) {
-                Double temp = generator.nextDouble() * (max.doubleValue() - min.doubleValue()) + min.doubleValue();
-                this.matrix.set(i, j, (T) temp);
+                this.matrix.set(i, j, MatrixOperations.cast(generator.nextDouble() * (max.doubleValue() - min.doubleValue()) + min.doubleValue(), clazz));
             }
         }
         return this;

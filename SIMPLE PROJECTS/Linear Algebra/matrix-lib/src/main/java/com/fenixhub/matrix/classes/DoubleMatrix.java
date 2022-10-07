@@ -24,4 +24,8 @@ public class DoubleMatrix extends GenericMatrix<Double> {
         super(array);
     }
 
+    public DoubleMatrix(GenericMatrix<Double> matrix) {
+        super(matrix);
+    }
+
 }

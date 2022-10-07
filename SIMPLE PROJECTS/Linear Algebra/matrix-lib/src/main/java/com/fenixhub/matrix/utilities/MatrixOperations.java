@@ -6,7 +6,7 @@ import com.fenixhub.matrix.classes.GenericMatrix;
 @SuppressWarnings("unchecked")
 public class MatrixOperations {
     
-    private static <T> T cast(Double value, Class<T> clazz) {
+    public static <T> T cast(Double value, Class<T> clazz) {
         if (clazz == Integer.class) {
             return (T) clazz.cast(value.intValue());
         } else if (clazz == Long.class) {
