@@ -1,0 +1,32 @@
+import java.util.Scanner;
+public class Main
+{
+	public static void main(String[] args) 
+	{
+	    Scanner sc=new Scanner(System.in);
+	    System.out.print("Enter number of elements:- ");
+	    int n=sc.nextInt();
+		int a[]=new int[n];
+		System.out.print("Enter values :- ");
+		for(int i=0;i<n;i++)
+		{
+		    a[i]=sc.nextInt();
+		}
+		System.out.print("Enter element to search :- ");
+		int num=sc.nextInt();
+		int index=f(a,num,0);
+		System.out.print(index+1);
+	}
+	static int f(int []a,int num,int i)
+	{
+	    if(i==a.length)
+	    return -1;
+	    if(a[i]==num)
+	    {
+	        return i;
+	    }
+	    else
+	    return f(a,num,i+1);
+	}
+}
+
