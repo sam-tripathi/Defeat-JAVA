@@ -89,6 +89,7 @@ public class MatrixOperations {
         GenericMatrix<T> result = new GenericMatrix<T>(a.getRows(), b.getColumns(), a.getClazz());
         for (int i = 0; i < result.getRows(); i++) {
             for (int j = 0; j < result.getColumns(); j++) {
+                sum = 0.0;
                 for (int k = 0; k < a.getColumns(); k++) {
                     sum += a.get(i, k).doubleValue() * b.get(k, j).doubleValue();
                 }
@@ -182,6 +183,20 @@ public class MatrixOperations {
 
         return determinat;
 
+    }
+
+    public static <T extends Number> boolean equals(GenericMatrix<T> a, GenericMatrix<T> b) {
+        if (a.getRows() != b.getRows() || a.getColumns() != b.getColumns()) {
+            return false;
+        }
+        for (int i = 0; i < a.getRows(); i++) {
+            for (int j = 0; j < a.getColumns(); j++) {
+                if (a.get(i, j).doubleValue() != b.get(i, j).doubleValue()) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
 }

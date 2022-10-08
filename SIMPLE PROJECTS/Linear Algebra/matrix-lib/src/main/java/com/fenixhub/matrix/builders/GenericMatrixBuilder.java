@@ -27,11 +27,41 @@ public class GenericMatrixBuilder<T extends Number> {
         return this;
     }
 
+    public GenericMatrixBuilder<T> ofRandom(int nRows, int nColumns) {
+        this.matrix = new GenericMatrix<T>(nRows, nColumns, clazz);
+        for (int i = 0; i < nRows; i++) {
+            for (int j = 0; j < nColumns; j++) {
+                this.matrix.set(i, j, MatrixOperations.castDouble(generator.nextDouble(), clazz));
+            }
+        }
+        return this;
+    }
+
     public GenericMatrixBuilder<T> ofRandom(int nRows, int nColumns, T min, T max) {
         this.matrix = new GenericMatrix<T>(nRows, nColumns, clazz);
         for (int i = 0; i < nRows; i++) {
             for (int j = 0; j < nColumns; j++) {
                 this.matrix.set(i, j, MatrixOperations.castDouble(generator.nextDouble() * (max.doubleValue() - min.doubleValue()) + min.doubleValue(), clazz));
+            }
+        }
+        return this;
+    }
+
+    public GenericMatrixBuilder<T> ofZeros(int nRows, int nColumns) {
+        this.matrix = new GenericMatrix<T>(nRows, nColumns, clazz);
+        for (int i = 0; i < nRows; i++) {
+            for (int j = 0; j < nColumns; j++) {
+                this.matrix.set(i, j, MatrixOperations.castDouble(0.0, clazz));
+            }
+        }
+        return this;
+    }
+
+    public GenericMatrixBuilder<T> ofOnes(int nRows, int nColumns) {
+        this.matrix = new GenericMatrix<T>(nRows, nColumns, clazz);
+        for (int i = 0; i < nRows; i++) {
+            for (int j = 0; j < nColumns; j++) {
+                this.matrix.set(i, j, MatrixOperations.castDouble(1.0, clazz));
             }
         }
         return this;
