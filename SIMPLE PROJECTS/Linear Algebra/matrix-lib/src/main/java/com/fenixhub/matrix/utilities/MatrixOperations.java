@@ -47,7 +47,6 @@ public class MatrixOperations {
         return tempMatrix;
     }
 
-
     // Calculate scalar product of matrix A for scalar s
     public static <T extends Number> GenericMatrix<T> scalar(GenericMatrix<T> a, T s) {
         GenericMatrix<T> result = new GenericMatrix<T>(a.getRows(), a.getColumns(), a.getClazz());
@@ -147,7 +146,6 @@ public class MatrixOperations {
         }
         return sum / (matrix.getRows() * matrix.getColumns());
     }
-
 
     public static <T extends Number> double determinant(GenericMatrix<T> matrix) {
         
