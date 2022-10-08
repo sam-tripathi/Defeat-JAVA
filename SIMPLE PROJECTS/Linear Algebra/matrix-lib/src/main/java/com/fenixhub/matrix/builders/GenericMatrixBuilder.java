@@ -17,16 +17,36 @@ public class GenericMatrixBuilder<T extends Number> {
         this.clazz = clazz;
     }
 
-    public GenericMatrixBuilder<T> fromArray(T[][] array) {
+    public GenericMatrixBuilder<T> ofSize(int nRows, int nColumns) {
+        this.matrix = new GenericMatrix<T>(nRows, nColumns, clazz);
+        return this;
+    }
+
+    public GenericMatrixBuilder<T> ofArray(T[][] array) {
         this.matrix = new GenericMatrix<T>(array);
         return this;
     }
 
-    public GenericMatrixBuilder<T> fromRandom(int nRows, int nColumns, T min, T max) {
+    public GenericMatrixBuilder<T> ofRandom(int nRows, int nColumns, T min, T max) {
         this.matrix = new GenericMatrix<T>(nRows, nColumns, clazz);
         for (int i = 0; i < nRows; i++) {
             for (int j = 0; j < nColumns; j++) {
-                this.matrix.set(i, j, MatrixOperations.cast(generator.nextDouble() * (max.doubleValue() - min.doubleValue()) + min.doubleValue(), clazz));
+                this.matrix.set(i, j, MatrixOperations.castDouble(generator.nextDouble() * (max.doubleValue() - min.doubleValue()) + min.doubleValue(), clazz));
+            }
+        }
+        return this;
+    }
+
+    // Generate Identity Matrix
+    public GenericMatrixBuilder<T> ofIdentity(int nRows, int nColumns) {
+        this.matrix = new GenericMatrix<T>(nRows, nColumns, clazz);
+        for (int i = 0; i < nRows; i++) {
+            for (int j = 0; j < nColumns; j++) {
+                if (i == j) {
+                    this.matrix.set(i, j, MatrixOperations.castDouble(1.0, clazz));
+                } else {
+                    this.matrix.set(i, j, MatrixOperations.castDouble(0.0, clazz));
+                }
             }
         }
         return this;

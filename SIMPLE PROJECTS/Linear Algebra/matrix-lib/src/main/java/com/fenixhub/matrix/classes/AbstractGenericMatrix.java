@@ -39,9 +39,13 @@ abstract class AbstractGenericMatrix<T extends Number> {
 
     protected abstract AbstractGenericMatrix<T> insertRow(int index, T[] row);
 
+    protected abstract AbstractGenericMatrix<T> removeRow(int index);
+
     protected abstract AbstractGenericMatrix<T> setColumn(int index, T[] column);
 
     protected abstract AbstractGenericMatrix<T> insertColumn(int index, T[] column);
+
+    protected abstract AbstractGenericMatrix<T> removeColumn(int index);
 
     protected abstract AbstractGenericMatrix<T> set(int row, int column, T value);
 
@@ -63,5 +67,21 @@ abstract class AbstractGenericMatrix<T extends Number> {
     
     protected abstract AbstractGenericMatrix<T> getMatrix(int nRows, int nColumns);
 
+    protected abstract boolean isSquare();
 
+    protected abstract boolean isSymmetric();
+
+    protected abstract boolean isIdentity();
+
+    protected abstract boolean isZero();
+
+    protected abstract boolean isUpperTriangular();
+
+    protected abstract boolean isLowerTriangular();
+
+    protected abstract boolean isTriangular();
+
+    protected abstract boolean isDiagonal();
+
+    protected abstract AbstractGenericMatrix<T> copy();
 }

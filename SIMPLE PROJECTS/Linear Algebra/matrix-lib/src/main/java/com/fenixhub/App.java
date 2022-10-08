@@ -39,9 +39,10 @@ public class App
         System.out.println(matrix.getMatrix(2, 2));
 
         System.out.println("Generating a random matrix with a MatrixBuilder");
-        IntegerMatrix newMatrixFromBuilder = new IntegerMatrix(new GenericMatrixBuilder<>(Integer.class)
-        .fromRandom(10, 10, -20, 20)
-        .build()
+        IntegerMatrix newMatrixFromBuilder = new IntegerMatrix(
+            new GenericMatrixBuilder<>(Integer.class)
+            .ofRandom(10, 10, -20, 20)
+            .build()
         );
         System.out.println(newMatrixFromBuilder);
 
@@ -70,5 +71,7 @@ public class App
         System.out.println(MatrixOperations.hadamard(doubleMatrix, doubleMatrix));
 
 
+        System.out.println("Determinant of a matrix");
+        System.out.println(MatrixOperations.determinant(doubleMatrix));
     }
 }

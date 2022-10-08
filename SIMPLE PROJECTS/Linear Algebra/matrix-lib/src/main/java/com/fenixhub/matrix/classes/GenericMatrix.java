@@ -44,17 +44,17 @@ public class GenericMatrix<T extends Number> extends AbstractGenericMatrix<T> {
     }
 
     protected T[][] getArrayCopy(int fromRow, int fromColumn, int toRow, int toColumn) {
-        if (fromRow < 0 || fromRow >= getRows()) {
-            throw new IndexOutOfBoundsException("From row index is out of bound.");
+        if (fromRow < 0 || fromRow > getRows()) {
+            throw new IndexOutOfBoundsException(String.format("{fromRow} index is out of bound. Expected 0-%d got %d", getRows(), fromRow));
         }
-        if (fromColumn < 0 || fromColumn >= getColumns()) {
-            throw new IndexOutOfBoundsException("From column index is out of bound.");
+        if (fromColumn < 0 || fromColumn > getColumns()) {
+            throw new IndexOutOfBoundsException(String.format("{fromColumn} index is out of bound. Expected 0-%d got %d", getColumns(), fromColumn));
         }
-        if (toRow < 0 || toRow >= getRows()) {
-            throw new IndexOutOfBoundsException("To row index is out of bound.");
+        if (toRow < 0 || toRow > getRows()) {
+            throw new IndexOutOfBoundsException(String.format("{toRow} index is out of bound. Expected 0-%d got %d", getRows(), toRow));
         }
-        if (toColumn < 0 || toColumn >= getColumns()) {
-            throw new IndexOutOfBoundsException("To column index is out of bound.");
+        if (toColumn < 0 || toColumn > getColumns()) {
+            throw new IndexOutOfBoundsException(String.format("{toColumn} index is out of bound. Expected 0-%d got %d", getColumns(), fromColumn));
         }
         
         T[][] tempArray = (T[][]) Array.newInstance(getClazz(), toRow - fromRow, toColumn - fromColumn);
@@ -71,11 +71,11 @@ public class GenericMatrix<T extends Number> extends AbstractGenericMatrix<T> {
 
     @Override
     public GenericMatrix<T> setRow(int index, T[] row) {
-        if (index < 0 || index >= this.array.length) {
+        if (index < 0 || index >= getRows()) {
             throw new IndexOutOfBoundsException("Row index is out of bound.");
         }
-        if (row.length != this.array[index].length) {
-            throw new MatrixSizeException("Row size is not valid.");
+        if (row.length != getColumns()) {
+            throw new MatrixSizeException("row length", row.length, getColumns());
         }
         this.array[index] = row;
         return this;
@@ -86,8 +86,8 @@ public class GenericMatrix<T extends Number> extends AbstractGenericMatrix<T> {
         if (index < 0 || index > getRows()) {
             throw new IndexOutOfBoundsException("Row index is out of bound.");
         }
-        if (row.length != this.array.length) {
-            throw new MatrixSizeException("Row size is not valid.");
+        if (row.length != getColumns()) {
+            throw new MatrixSizeException("row length", row.length, getColumns());
         }
 
         T[][] tempArray = (T[][]) Array.newInstance(getClazz(), getRows() + 1, getColumns());
@@ -106,12 +106,31 @@ public class GenericMatrix<T extends Number> extends AbstractGenericMatrix<T> {
     }
 
     @Override
+    public GenericMatrix<T> removeRow(int index) {
+        if (index < 0 || index >= getRows()) {
+            throw new IndexOutOfBoundsException("Row index is out of bound.");
+        }
+
+        T[][] tempArray = (T[][]) Array.newInstance(getClazz(), getRows() - 1, getColumns());
+        for (int i = 0; i < tempArray.length; i++) {
+            if (i < index) {
+                tempArray[i] = this.array[i];
+            } else {
+                tempArray[i] = this.array[i + 1];
+            }
+        }
+
+        setArray(tempArray);
+        return this;
+    }
+
+    @Override
     public GenericMatrix<T> setColumn(int index, T[] column) {
         if (index < 0 || index >= getColumns()) {
             throw new IndexOutOfBoundsException("Column index is out of bound.");
         }
-        if (column.length != this.array[0].length) {
-            throw new MatrixSizeException("Column size is not valid.");
+        if (column.length != getRows()) {
+            throw new MatrixSizeException("column length", column.length, getRows());
         }
         for (int i = 0; i < getRows(); i++) {
             this.array[i][index] = column[i];
@@ -124,8 +143,8 @@ public class GenericMatrix<T extends Number> extends AbstractGenericMatrix<T> {
         if (index < 0 || index > getColumns()) {
             throw new IndexOutOfBoundsException("Column index is out of bound.");
         }
-        if (column.length != this.array.length) {
-            throw new MatrixSizeException("Column size is not valid.");
+        if (column.length != getRows()) {
+            throw new MatrixSizeException("column length", column.length, getRows());
         }
 
         T[][] tempArray = (T[][]) Array.newInstance(getClazz(), getRows(), getColumns() + 1);
@@ -137,6 +156,27 @@ public class GenericMatrix<T extends Number> extends AbstractGenericMatrix<T> {
                     tempArray[i][j] = column[i];
                 } else {
                     tempArray[i][j] = this.array[i][j - 1];
+                }
+            }
+        }
+
+        setArray(tempArray);
+        return this;
+    }
+
+    @Override
+    public GenericMatrix<T> removeColumn(int index) {
+        if (index < 0 || index >= getColumns()) {
+            throw new IndexOutOfBoundsException("Column index is out of bound.");
+        }
+
+        T[][] tempArray = (T[][]) Array.newInstance(getClazz(), getRows(), getColumns() - 1);
+        for (int i = 0; i < tempArray.length; i++) {
+            for (int j = 0; j < tempArray[i].length; j++) {
+                if (j < index) {
+                    tempArray[i][j] = this.array[i][j];
+                } else {
+                    tempArray[i][j] = this.array[i][j + 1];
                 }
             }
         }
@@ -220,6 +260,110 @@ public class GenericMatrix<T extends Number> extends AbstractGenericMatrix<T> {
     }
 
     @Override
+    public boolean isSquare() {
+        return getRows() == getColumns();
+    }
+
+    @Override
+    public boolean isSymmetric() {
+        if (!isSquare()) {
+            return false;
+        }
+        for (int i = 0; i < getRows(); i++) {
+            for (int j = 0; j < getColumns(); j++) {
+                if (!this.array[i][j].equals(this.array[j][i])) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean isDiagonal() {
+        if (!isSquare()) {
+            return false;
+        }
+        for (int i = 0; i < getRows(); i++) {
+            for (int j = 0; j < getColumns(); j++) {
+                if (i != j && get(i, j).doubleValue()!=(0.0)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean isIdentity() {
+        if (!isSquare()) {
+            return false;
+        }
+        for (int i = 0; i < getRows(); i++) {
+            for (int j = 0; j < getColumns(); j++) {
+                if (i == j && get(i, j).doubleValue()!=(1.)) {
+                    return false;
+                } else if (i != j && get(i, j).doubleValue()!=(0.)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean isUpperTriangular() {
+        if (!isSquare()) {
+            return false;
+        }
+        for (int i = 0; i < getRows(); i++) {
+            for (int j = 0; j < getColumns(); j++) {
+                if (i > j && get(i, j).doubleValue()!=(0.0)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean isLowerTriangular() {
+        if (!isSquare()) {
+            return false;
+        }
+        for (int i = 0; i < getRows(); i++) {
+            for (int j = 0; j < getColumns(); j++) {
+                if (i < j && get(i, j).doubleValue()!=(0.0)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean isTriangular() {
+        return isUpperTriangular() || isLowerTriangular();
+    }
+
+    @Override
+    public boolean isZero() {
+        for (int i = 0; i < getRows(); i++) {
+            for (int j = 0; j < getColumns(); j++) {
+                if (get(i, j).doubleValue()!=(0.0)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    @Override 
+    public GenericMatrix<T> copy() {
+        return new GenericMatrix<T>(getArrayCopy());
+    }
+
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < getRows(); i++) {
@@ -228,7 +372,7 @@ public class GenericMatrix<T extends Number> extends AbstractGenericMatrix<T> {
             }
             sb.append("\r\n");
         }
-        return sb.toString();
+        return "\r\n"+sb.toString();
     }
 
 }
