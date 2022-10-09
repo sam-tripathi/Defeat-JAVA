@@ -1,0 +1,16 @@
+server:
+  port: 8761
+
+spring:
+  application:
+    name: API-GATEWAY
+
+eureka:
+  client:
+    eureka-server-connect-timeout-seconds: 5
+    enabled: true
+    fetch-registry: false
+    register-with-eureka: false
+  instance:
+    prefer-ip-address:true
+    hostname:localhost
