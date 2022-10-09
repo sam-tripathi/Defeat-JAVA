@@ -1,3 +1,7 @@
+/* 
+* Child Class
+ * inherit all(not all) the properties and methods of a base class. 
+ */
 public class Cuboid extends Rectangle {
     private double height;
 
