@@ -1,0 +1,111 @@
+public class doubly_linked_list
+{
+    public class Node
+    {
+        int data;
+        Node next;
+        Node previous;
+
+        public Node(int value)
+        {
+            this.data=value;
+        }
+
+    }
+    public Node head=null;
+    public Node tail=null;
+    public void  insertFirst(int data)
+    {
+        Node n = new Node(data);
+        if(head==null)
+        {
+            head=n;
+            tail=n;
+            head.previous=null;
+            tail.next=null;
+        }
+
+        else {
+            head.previous=n;
+            n.next=head;
+            n.previous=null;
+            head=n;
+        }
+    }
+
+    public void insertEnd(int data)
+    {
+        Node n = new Node(data);
+        if(head==null)
+        {
+            head=n;
+            tail=n;
+            head.previous=null;
+            tail.next=null;
+        }
+        else {
+            tail.next=n;
+            n.previous=tail;
+            tail=n;
+            tail.next=null;
+        }
+    }
+    public void  deleteFirst()
+    {
+        if(head==null)
+        {
+            System.out.println("Cannot delete the element since list is empty");
+            return ;
+        }
+        else {
+            int element=head.data;
+            System.out.println("Deleted element is "+element);
+            head=head.next;
+        }
+    }
+    public void deleteEnd()
+    {
+        if(head==null)
+        {
+            System.out.println("Cannot delete the element since list is empty");
+            return ;
+        }
+            int item=tail.data;
+            System.out.println("Deleted element is "+item);
+            tail=tail.previous;
+    }
+
+    public void display()
+    {
+        Node temp=head;
+
+        if(head==null)
+        {
+            System.out.println("Linked List is Empty");
+            return;
+        }
+         System.out.println("Nodes of Linked List are");
+        while(temp!=null)
+        {
+            System.out.println(temp.data);
+            temp=temp.next;
+        }
+    }
+
+    public static void main(String [] args)
+    {
+        doubly_linked_list list=new doubly_linked_list();
+        list.insertFirst(10);
+        list.insertFirst(20);
+        list.insertFirst(30);
+        list.insertFirst(40);
+        list.insertFirst(50);
+        list.display();
+        list.insertEnd(60);
+        list.display();
+        list.deleteFirst();
+        list.display();
+        list.deleteEnd();
+        list.display();
+    }
+}
