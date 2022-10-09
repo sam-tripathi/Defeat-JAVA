@@ -1,0 +1,30 @@
+public class Main
+{
+    static int [] search(int []a,int ele,int i,int count)
+    {
+        if(i==a.length)
+        {
+            int arr[]=new int[count];
+            return arr ;
+        }
+        int indices[]=null ;
+        if(a[i]==ele)
+		    indices=search(a,ele,i+1,count+1);
+		else
+		    indices=search(a,ele,i+1,count);
+		if(a[i]==ele)
+		indices[count]=i;
+		return indices;
+		
+    }
+	public static void main(String[] args)
+	{
+		int a[]={5,0,4,4,3,7} ;
+		int []ans=search(a,4,0,0) ;
+		for(int i:ans)
+		{
+		    System.out.print(i + ", ");
+		}
+	}
+}
+
