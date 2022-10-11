@@ -1,53 +1,55 @@
-#include <bits/stdc++.h>
-using namespace std;
- 
-int jumpSearch(int arr[], int x, int n)
+// Java program to implement Jump Search.
+public class JumpSearch
 {
-    // Finding block size to be jumped
-    int step = sqrt(n);
- 
-    // Finding the block where element is
-    // present (if it is present)
-    int prev = 0;
-    while (arr[min(step, n)-1] < x)
-    {
-        prev = step;
-        step += sqrt(n);
-        if (prev >= n)
-            return -1;
-    }
- 
-    // Doing a linear search for x in block
-    // beginning with prev.
-    while (arr[prev] < x)
-    {
-        prev++;
- 
-        // If we reached next block or end of
-        // array, element is not present.
-        if (prev == min(step, n))
-            return -1;
-    }
-    // If element is found
-    if (arr[prev] == x)
-        return prev;
- 
-    return -1;
+	public static int jumpSearch(int[] arr, int x)
+	{
+		int n = arr.length;
+
+		// Finding block size to be jumped
+		int step = (int)Math.floor(Math.sqrt(n));
+
+		// Finding the block where element is
+		// present (if it is present)
+		int prev = 0;
+		while (arr[Math.min(step, n)-1] < x)
+		{
+			prev = step;
+			step += (int)Math.floor(Math.sqrt(n));
+			if (prev >= n)
+				return -1;
+		}
+
+		// Doing a linear search for x in block
+		// beginning with prev.
+		while (arr[prev] < x)
+		{
+			prev++;
+
+			// If we reached next block or end of
+			// array, element is not present.
+			if (prev == Math.min(step, n))
+				return -1;
+		}
+
+		// If element is found
+		if (arr[prev] == x)
+			return prev;
+
+		return -1;
+	}
+
+	// Driver program to test function
+	public static void main(String [ ] args)
+	{
+		int arr[] = { 0, 1, 1, 2, 3, 5, 8, 13, 21,
+					34, 55, 89, 144, 233, 377, 610};
+		int x = 55;
+
+		// Find the index of 'x' using Jump Search
+		int index = jumpSearch(arr, x);
+
+		// Print the index where 'x' is located
+		System.out.println("\nNumber " + x +
+							" is at index " + index);
+	}
 }
- 
-// Driver program to test function
-int main()
-{
-    int arr[] = { 0, 1, 1, 2, 3, 5, 8, 13, 21,
-                34, 55, 89, 144, 233, 377, 610 };
-    int x = 55;
-    int n = sizeof(arr) / sizeof(arr[0]);
-     
-    // Find the index of 'x' using Jump Search
-    int index = jumpSearch(arr, x, n);
- 
-    // Print the index where 'x' is located
-    cout << "\nNumber " << x << " is at index " << index;
-    return 0;
-}
- 
