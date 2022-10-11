@@ -1,7 +1,6 @@
 ---
 title: "Manacher's Algorithm"
 description: 'Helps in finding longest palindromic substring in linear time'
-draft: true
 keywords:
   - leetcode
   - tutorial
@@ -110,22 +109,6 @@ Example: string = $abbba$ -> _ab#b#ba_
 In the case of an even length palindrome, the middle character will be a "#" character.
 
 Example: string = $aaccccaa$ -> _#a#a#c#c#c#c#a#a#_ . Here, we can see that the middle character will come out to be a "#"
-
-#### Steps of the `Manacher's algorithm` are as follows:
-
-1. Create an array arr of length sLen which is 2∗n+3 (n being the length of the given string s), to modify the given string.
-2. Prepend "@" and append "$" in the string s. This is done to avoid the bounds checking.
-3. Now fill up arr be alternate "#" and characters of the given string s.
-4. We will declare some variables-
-* To store the maximum length of palindrome declare a variable maxLength
-* Declare S=0, R=0 and C=0 which stores the starting, ending and center position of the palindrome found.
-5. We create an array Plen to store the length of each palindrome found. The length is stored in the array about their centre i.e C.
-6. Create a for loop iterating from i=1 to sLen−1.
-7. Inside the for loop, check if i < R, if yes, then assign minimum of R-i and Plen[2*C-i] to Plen[i].
-8. After the if condition nest a while loop, to count width along the center, condition being, arr[i+Plen[i]+1] is equal to arr[i-Plen[i]-1], if yes, increment Plen[i] by 1. Here we try to expand the palindrome centered at i.
-9. Now if palindrome centered at i expands past right, we will adjust center(C) based on expanded palindrome. That means, check if i+Plen[i] is greater than R, if yes, assign C to be 1, and R to be i+Plen[i].
-10. Check if Plen[i] comes out to be greater than maxLength, then the starting point S is assigned (i-Plen[i]-1)/2, and maxLength is assigned Plen[i].
-11. End the for loop and return the substring of s starting from S and ending at S+maxLength-1.
 
 #### Implementation -
 
@@ -267,7 +250,7 @@ Output: $bb$
 
 <ins>Solution</ins> : We can do this problem using the same approach as mentioned in the above algorithm. This problem states to find the longest palindromic substring which indeed is the `Manacher's Algorithm`. Hence, we can directly apply it here.
 
-Here we will try to implement the algorithm using a dynamic vector array(cpp) and following the same algorithm as stated above. Instead of vector array one can also use arrays or list to implement it.
+Here we will try to implement the algorithm using array and following the same algorithm as stated above. 
 
 ```java
 
@@ -362,8 +345,8 @@ class string
 ```
 * Some suggested problems for `Manacher's Algorithm`-
 
-| Problem Title        | Difficulty | Solution Link                                                                                                                                                                                                                          |
-| ---------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Problem Title        | Difficulty |
+| ---------------- | ---------- |
 | [214 - Shortest Palindrome](https://leetcode.com/problems/shortest-palindrome/) | Hard   | 
 
 
