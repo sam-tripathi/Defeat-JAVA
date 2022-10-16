@@ -1,0 +1,100 @@
+// Java program to demonstrate working of split(regex,
+// limit) with small limit.
+public class GFG {
+    public static void main(String args[])
+    {
+        String str = "geekss@for@geekss";
+        String[] arrOfStr = str.split("@", 2);
+  
+        for (String a : arrOfStr)
+            System.out.println(a);
+    }
+}
+Output
+
+geekss
+for@geekss
+
+                               +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// Java program to demonstrate working of split(regex,
+// limit) with high limit.
+public class GFG {
+    public static void main(String args[])
+    {
+        String str = "geekss@for@geekss";
+        String[] arrOfStr = str.split("@", 5);
+  
+        for (String a : arrOfStr)
+            System.out.println(a);
+    }
+}
+="code-output">Output
+
+geekss
+for
+geekss
+
+                                 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+ Java program to demonstrate working of split(regex,
+// limit) with negative limit.
+public class GFG {
+    public static void main(String args[])
+    {
+        String str = "geekss@for@geekss";
+        String[] arrOfStr = str.split("@", -2);
+  
+        for (String a : arrOfStr)
+            System.out.println(a);
+    }
+}
+Output
+
+geekss
+for
+geekss
+
+                             ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+REGEX
+
+// Java program to demonstrate working of split()
+public class GFG {
+    public static void main(String args[])
+    {
+        String str = "GeeksforGeeks:A Computer Science Portal";
+        String[] arrOfStr = str.split(":");
+  
+        for (String a : arrOfStr)
+            System.out.println(a);
+    }
+}
+Output
+
+GeeksforGeeks
+A Computer Science Portal
+
+                                       +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+// Java program to demonstrate working of split()
+public class GFG {
+    public static void main(String args[])
+    {
+        String str = "GeeksforGeeksforStudents";
+        String[] arrOfStr = str.split("for");
+  
+        for (String a : arrOfStr)
+            System.out.println(a);
+    }
+}
+Output
+
+Geeks
+Geeks
+Students
+
+
+
+
+
+
