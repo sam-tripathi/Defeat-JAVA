@@ -23,3 +23,22 @@ Instructions
 - Commit it (`git commit -m "commit_message"`)
 - Push your project (`git push origin your_branch_name`)
 - Create a pull request
+
+
+<h2 align="center">🤝 Support</h2>
+
+<p align="center">
+<a href="https://www.buymeacoffee.com/samtripathi" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-green.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+</p>
+
+<p align="center">🎀 Contribution, 🔥 issues, and 🥮 feature requests are most welcome!</p>
+
+<p align="center">💙 If you like this projects, Give them ⭐ and Share it with friends!</p>
+</p>
+<p align="center">Made with ❤️ in India</p>
+
+<h1 align='center'>⚡️<i>Stay awesome!</i>⚡️</h1>
+
+<p align="center">
+        <img src="https://raw.githubusercontent.com/mayhemantt/mayhemantt/Update/svg/Bottom.svg" alt="Github Stats" />
+</p>
