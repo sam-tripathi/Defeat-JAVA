@@ -1,0 +1,103 @@
+/*Here we have to print all the nodes at the distance K from the given target node ,
+input: 1 2 3 4 5 6 7 -1 -1 -1 -1 -1 -1 -1 -1
+       3 3
+       here the first line of input is binaryTree in levelorder
+       second line of input representing value of target and distance respectively
+       
+ output:4
+        5 
+        Here at the 3 distance from target node 3 are 4 and 5 value nodes of given binary tree*/
+/*
+	
+	Following is the structure used to represent the Binary Tree Node
+
+	class BinaryTreeNode<T> {
+		T data;
+		BinaryTreeNode<T> left;
+		BinaryTreeNode<T> right;
+
+		public BinaryTreeNode(T data) {
+			this.data = data;
+			this.left = null;
+			this.right = null;
+		}
+	}
+
+*/
+import java.util.ArrayList;
+public class Solution {
+    
+    public static void printnodeDepth(BinaryTreeNode<Integer> root,int k)
+    {
+        if(root == null)
+            return;
+        else if(k == 0)
+        {
+            System.out.println(root.data);
+        }
+        else{
+            printnodeDepth(root.left,k-1); // depth search at left subtree
+            printnodeDepth(root.right,k-1);// depth search at right subtree
+            // here depth means the nodes below the target node
+        }
+    }
+    public static int print(BinaryTreeNode<Integer> root, int node/*Targetnode*/, int k/*distance*/)
+    {
+        
+        if(root == null)
+        {
+            return -1;
+        }
+        else if(root.data == node)
+        {
+         // now at the distance K ,i need to search all nodes
+            printnodeDepth(root.left,k-1);// k-1 because iam searching from left tree node
+            printnodeDepth(root.right,k-1);
+            return 0;
+        }
+      
+            /* if i dont get the node at k distances such that the root node then i have to search at right subtree(We started searching now in upward direction) */
+        // we are exploring all other nodes after the completion of depth search here
+        int leftsidedist = 0,rightsidedist = 0;
+        leftsidedist = print(root.left,node,k); // iam searching node in left subtree from the root
+        if(leftsidedist != -1) // so if not -1 then node is present
+        {
+            if(leftsidedist+1 == k)
+            {
+                System.out.println(root.data);
+            }
+            else
+            {
+                int remaindist = k-(leftsidedist+1)-1; //searching from rightside of tree
+                printnodeDepth(root.right, remaindist);
+            }
+            return leftsidedist+1;
+        }
+        
+         rightsidedist = print(root.right,node,k); // iam searching node in right subtree from the root
+        if(rightsidedist != -1) // so if not -1 then node is present
+        {
+            if(rightsidedist+1 == k)
+            {
+                System.out.println(root.data);// printing root itself we if found it at k distance from target
+            }
+            else
+            {
+                int remaindist = k-(rightsidedist+1)-1; //searching from rightside of tree
+                printnodeDepth(root.left, remaindist);
+            }
+            return rightsidedist+1;
+        }
+         return -1;     
+            
+    }
+    // This the function that will be given to us(nodesAtDistanceK)
+	public static void nodesAtDistanceK(BinaryTreeNode<Integer> root, int node, int k)
+    {
+       print(root,node,k);
+	}
+
+}
+
+I hope you learnt the upward traversal from any node(target node) in binary tree
+Thank you : )
