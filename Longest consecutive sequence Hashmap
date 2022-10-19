@@ -1,0 +1,111 @@
+/*You are given an array of unique integers that contain numbers in random order. You have to find the longest possible sequence of consecutive numbers using the numbers from given array.
+ You need to return the output array which contains starting and ending element. If the length of the longest possible sequence is one, then the output array must contain only single element.
+  
+Input format:
+The first line of input contains an integer, that denotes the value of the size of the array. Let us denote it with the symbol n.
+The following line contains n space separated integers, that denote the value of the elements of the array.
+
+Here is the Example
+13
+2 12 9 16 10 5 3 20 25 11 1 8 6 
+
+Output:
+8 12 
+Note: Here function longestConsecutiveIncreasingSequence will be give to you is assumed
+
+MAKE SURE YOU TRACE THE CODE USING PEN AND PAPER FOR MORE CLARITY*/
+
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Map.Entry;
+import java.util.HashMap.remove();
+public class Solution
+{
+    public static HashMap<Integer,Boolean> create(int arr[])
+    {
+        HashMap<Integer,Boolean> m = new HashMap<>();
+        for(int i =0;i<arr.length;i++)
+        {
+           m.put(arr[i],true);        
+        }
+        return m;
+    }
+    public static int index(int curr,int[] arr)
+    {
+        for(int i =0;i<arr.length;i++)
+        {
+            if(arr[i] == curr)
+            {
+                return i;
+            }
+        }
+        return 0;
+    }
+	public static ArrayList<Integer> longestConsecutiveIncreasingSequence(int[] arr)
+    {
+        ArrayList<Integer> result = new ArrayList<>();
+        HashMap<Integer,Boolean> map = new HashMap<>();
+        map = create(arr);
+        // Traverse on array element Leftside and rightside 
+        int maxLength = Integer.MIN_VALUE;
+        int start_elem = 0;
+        int len = 0;
+        int temp = 0;
+        int curr = arr[0];
+        int pos =0;
+        int store =0;
+        for(int i =0;i<arr.length;i++) // Value of cur true haan yeah nahi
+        {
+             len =0;
+             if(map.get(arr[i])) // true
+             {
+                 // left or right check karna hai
+                 //right
+                 curr = arr[i];
+                 temp = curr;
+                 pos = i;
+                 while(map.containsKey(curr) && map.get(curr))
+                 {
+                     len++;
+                     map.put(curr,false);
+                     curr+=1;
+                 }
+                 //left side
+                 curr = arr[i]-1;
+                 while(map.containsKey(curr) && map.get(curr))
+                 {
+                     len++;
+                     // linear search function banugha esmme merko position milegha
+                     pos = index(curr,arr);
+                     temp = curr;
+                     map.put(curr,false);
+                     curr-=1;
+                 }
+                 if(maxLength < len)
+                 {
+                     maxLength = len;
+                     start_elem = temp;
+                     store = pos;
+                 }
+                else if(maxLength == len && pos < store )
+                {
+                    maxLength = len;
+                    start_elem = arr[pos];
+                    store = pos;
+                 }
+                 
+             }
+            else
+            {
+                continue;
+            }
+        }
+        result.add(start_elem);
+        result.add(start_elem+maxLength-1);
+        //System.out.println(start_elem+" "+(start_elem+maxLength-1));
+        return result;
+    }
+}
+
+Hopevyou understood the code
+Thank you : )
