@@ -1,0 +1,2 @@
+# Gerenciamento-memoria
+🧠 Trabalhinho faculdade
