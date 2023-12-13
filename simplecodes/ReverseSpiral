@@ -1,0 +1,65 @@
+import java.util.*; // importing packages
+public class Spiralmatrix  // This Code is Written by Sameer Trpathi
+{// start of class
+    public static void main()
+    { // start of main
+        Scanner sc = new Scanner(System.in);
+        System.out.println("ENTER THE NUMBER ="); // taking input by the user 
+        int n = sc.nextInt();
+        int [][]m= new int [n][n]; // forming matrix of n X n 
+        int cs=0; // marking start index of column 
+        int ce=n-1; // marking end index of column 
+        int rs=0; // marking start index of row
+        int re=n-1; // marking start index  of row 
+        int num = n*n; // storing the number to print in reverse order .
+        
+        
+        
+        while (cs<=ce && rs<=re) // this loop helps to fill element in spiral order
+        {// start of while loop 
+
+            // Moving right 
+            for(int i = cs;i<=ce;i++) // loop to input value in upper boundary 
+            {
+                m[rs][i] = num--;// storing the value in reverse order in upper most boundary of column .
+            }
+            rs++; // shifting row control to 2nd row to print left element from 2nd row in lastr column  
+
+            // moving down 
+            for(int i = rs;i<=re;i++)// loop to input value in right boundary of matrix 
+            { 
+                m[i][ce]=num--;// storing the value in reverse order in right boundary of matrix
+            }
+            ce--;// shifting column control to 2nd last column to print elements in lower boundary of matrixfrom left to right
+
+            // moving left
+            if(rs<=re) // checking if the control is not going out of bound in row indexes 
+            {    for(int i=ce;i>=cs;i--)// loop to input value in down boundary of matrix
+                {
+                    m[re][i]=num--;// storing the value in reverse order in down boundary of matrix
+                }
+            }
+            re--; //decreasing rowend index by 1 to direction the print upward   
+
+            //moving up
+            if(cs<=ce) // checking if the control is not going out of bound in column indexes
+            {  for(int i= re;i>=rs;i--)// loop to input value in left boundary of matrix
+                { m[i][cs]=num--; // storing the value in reverse order in left boundary of matrix
+                }
+            }
+            cs++;//increase column index by 1 to direction the print in spiral form by turning control inward from left to right .
+
+        } // end of while loop
+
+        //loop to print the spiral 
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                System.out.print(m[i][j]+"\t");
+            }
+            System.out.println();
+        }
+
+    }// end of main
+}// end of class
