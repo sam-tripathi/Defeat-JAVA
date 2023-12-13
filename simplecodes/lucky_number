@@ -1,0 +1,41 @@
+import java.util.*; // importing package
+class lucky_number // class name 
+{  //start of class 
+    public static void main()   // This code is written by SAMEER TRIPATHI
+    { // start of main 
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Input number to check=");// taking input
+        int n= sc.nextInt();// storing input value in n 
+        int []m= new int[n+1]; // forming matrix of size n+1
+        if(n>50)
+        {// checking if the number is in range or not
+            System.out.println("OUT OF RANGE");
+            System.exit(0);
+        }
+        else
+            m[n]=0;// storing 0 at the last index of the array 
+
+        for(int i=0;i<n;i++) // loop to inter the natural numbers from 1 to limit n in the array up to 2nd last index of the array 
+        { m[i]=i+1;
+        }
+
+        for(int i=1;i<n;i++)
+        {
+            for( int j=i;j<n;j=j+i)
+            {
+                for(int k=j;k<n;k++) // loop to store the value of the next index in the current index
+                {
+                    m[k]=m[k+1];// stores the value of next index in the current index
+                }
+            }
+        }
+
+        System.out.println("lucky numbers ="); // printing heading before printing lucky numbers
+        for(int j=0;j<n;j++)// loop to print array containinmg lucky numbers 
+        {  
+            if(m[j]!=0)                    // condition to eliminate element "0" from printing which is present to the right side of the array 
+                System.out.println(m[j]+"\t");     // printing elements from array
+        }
+
+    }// End of main
+} //End of class
